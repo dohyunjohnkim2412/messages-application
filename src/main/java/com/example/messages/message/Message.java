@@ -1,4 +1,4 @@
-package com.example.messages.Message;
+package com.example.messages.message;
 
 import jakarta.persistence.*;
 
@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class Message {
 
     @Id
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "content")
@@ -18,25 +18,18 @@ public class Message {
     @Column(name = "created_on")
     private LocalDate createdOn;
 
+    // Constructors
     public Message() {
     }
 
     public Message(String content) {
         this.content = content;
+        this.createdOn = LocalDate.now();
     }
 
-    public Message(Long id, String content, LocalDate createdOn) {
-        this.id = id;
-        this.content = content;
-        this.createdOn = createdOn;
-    }
-
+    // Getters and Setters
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getContent() {
@@ -55,6 +48,7 @@ public class Message {
         this.createdOn = createdOn;
     }
 
+    // To String
     @Override
     public String toString() {
         return "Message{" +
