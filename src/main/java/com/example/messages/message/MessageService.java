@@ -1,6 +1,6 @@
 package com.example.messages.message;
 
-import com.example.messages.message.dto.MessageCreationDTO;
+import com.example.messages.message.dto.MessageContentDTO;
 import com.example.messages.message.dto.MessageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,11 +25,27 @@ public class MessageService {
                 .collect(Collectors.toList());
     }
 
-    public void createMessage(MessageCreationDTO messageCreationDTO) {
+    public void createMessage(MessageContentDTO messageCreationDTO) {
         Message message = new Message();
         message.setContent(messageCreationDTO.content());
         message.setCreatedOn(LocalDate.now());
         messageRepository.save(message);
     }
 
+    public MessageDTO getMessageById(Long id) {
+        return messageRepository.findById(id)
+                .map(this::convertToDTO)
+                .orElseThrow(() -> new IllegalArgumentException("Message not found"));
+    }
+
+    public void updateMessage(Long id, MessageContentDTO messageContentDTO) {
+        Message message = messageRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Message not found"));
+        message.setContent(messageContentDTO.content());
+        messageRepository.save(message);
+    }
+
+    public void deleteMessage(Long id) {
+        messageRepository.deleteById(id);
+    }
 }
