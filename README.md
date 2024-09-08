@@ -7,36 +7,48 @@ uses an in-memory H2 database.
 
 ## Setup Instructions
 
-The project uses Maven wrappers to build and run the application. If you wish to use your local Maven installation, you
-can replace `./mvnw` with `mvn` in the commands below.
+### 1. With Docker
 
-### Prerequisites
+Build the Docker image:
+
+   ```sh
+   docker build -t messages-application .
+   ```
+
+Run the Docker container:
+
+   ```sh
+   docker run -p 8080:8080 messages-application
+   ```
+
+### 2. Without Docker
+
+We will use the Maven Wrapper to build and run the application. If you have Maven installed, you can use the local Maven
+by replacing `./mvnw` with `mvn`.
+
+#### Prerequisites
 
 - Java 22
 
-### Steps
+Build the application:
 
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/dohyunjohnkim2412/messages-application.git
-
-2. Build the project:
    ```sh
    UNIX
     ./mvnw clean install
    
    Windows
     ./mvnw.cmd clean install
-    ```
+   ```
 
-3. Run the application:
+Run the application:
+
    ```sh
    UNIX
     ./mvnw spring-boot:run
    
    Windows
     ./mvnw.cmd spring-boot:run
-    ```
+   ```
 
 ## Project Structure
 
@@ -59,7 +71,8 @@ src
     │           └── MessageService               Service layer handling business logic.
     └── resources
         ├── application.properties               Configuration properties.
-        └── data.sql                             Sample SQL data for initializing the database.
+        ├── data.sql                             Sample SQL data for initializing the database.
+        └── schema.sql                           Database schema.
         
 .mvn                                             Maven wrapper files. 
 mvnw                                             Maven wrapper for Unix-based systems.
@@ -74,8 +87,8 @@ pom.xml                                          Maven project object model file
 - **Method**: GET
 - **URL**: `/messages`
 - **Query Parameters**:
-  - `top`: Number of messages to retrieve.
-  - `sort`: Sort messages by `id`, `content`, or `createdOn`.
+    - `top`: Number of messages to retrieve.
+    - `sort`: Sort messages by `id`, `content`, or `createdOn`.
 - **Response**: Returns a list of all messages using `MessageResponseDTO`.
 
 **Retrieve a Message by ID**
