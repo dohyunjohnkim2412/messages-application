@@ -35,17 +35,20 @@ public class MessageService {
     }
 
     // Create a new message
-    public void createMessage(MessageRequestDTO messageRequestDTO) {
+    public MessageResponseDTO createMessage(MessageRequestDTO messageRequestDTO) {
         Message message = new Message(messageRequestDTO.content());
         messageRepository.save(message);
+        return convertToDTO(message);
+
     }
 
     // Update a message
-    public void updateMessage(Long id, MessageRequestDTO messageRequestDTO) {
+    public MessageResponseDTO updateMessage(Long id, MessageRequestDTO messageRequestDTO) {
         Message message = messageRepository.findById(id)
                 .orElseThrow(() -> new MessageNotFoundException(id));
         message.setContent(messageRequestDTO.content());
         messageRepository.save(message);
+        return convertToDTO(message);
     }
 
     // Delete a message

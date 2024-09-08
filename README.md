@@ -99,7 +99,7 @@ pom.xml                                          Maven project object model file
 
 - **Method**: DELETE
 - **URL**: `/messages/{id}`
-- **Response**: Returns a success message or an error if the message doesn't exist.
+- **Response**: Returns a status code 200 if the message is successfully deleted. No content is returned.
 
 **H2 Database Console**
 

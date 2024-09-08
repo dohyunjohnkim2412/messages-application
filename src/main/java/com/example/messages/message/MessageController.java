@@ -27,22 +27,20 @@ public class MessageController {
 
     // Create a new message
     @PostMapping("/messages")
-    public String createMessage(@RequestBody MessageRequestDTO messageRequestDTO) {
-        messageService.createMessage(messageRequestDTO);
-        return "Message created";
+    public MessageResponseDTO createMessage(@RequestBody MessageRequestDTO messageRequestDTO) {
+        return messageService.createMessage(messageRequestDTO);
     }
 
     // Update a message
     @PutMapping("messages/{id}")
-    public String updateMessage(@PathVariable Long id, @RequestBody MessageRequestDTO messageRequestDTO) {
-        messageService.updateMessage(id, messageRequestDTO);
-        return "Message updated";
+    public MessageResponseDTO updateMessage(@PathVariable Long id, @RequestBody MessageRequestDTO messageRequestDTO) {
+
+        return messageService.updateMessage(id, messageRequestDTO);
     }
 
     // Delete a message
     @DeleteMapping("messages/{id}")
-    public String deleteMessage(@PathVariable Long id) {
+    public void deleteMessage(@PathVariable Long id) {
         messageService.deleteMessage(id);
-        return "Message deleted";
     }
 }
