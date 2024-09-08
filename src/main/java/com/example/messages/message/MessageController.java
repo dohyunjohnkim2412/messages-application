@@ -15,8 +15,11 @@ public class MessageController {
 
     // Get all messages
     @GetMapping("/messages")
-    public List<MessageResponseDTO> getAllMessages() {
-        return messageService.getAllMessages();
+    public List<MessageResponseDTO> getAllMessages(
+            @RequestParam(defaultValue = "10") int top,
+            @RequestParam(defaultValue = "id") String sort
+    ) {
+        return messageService.getAllMessages(top, sort);
     }
 
     // Get message by id

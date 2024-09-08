@@ -4,6 +4,9 @@ import com.example.messages.message.dto.MessageRequestDTO;
 import com.example.messages.message.dto.MessageResponseDTO;
 import com.example.messages.message.errors.MessageNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +24,9 @@ public class MessageService {
     }
 
     // Get all messages
-    public List<MessageResponseDTO> getAllMessages() {
-        return messageRepository.findAll().stream()
+    public List<MessageResponseDTO> getAllMessages(int top, String sort) {
+        Pageable paging = PageRequest.of(0, top, Sort.by(sort));
+        return messageRepository.findAll(paging).stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }

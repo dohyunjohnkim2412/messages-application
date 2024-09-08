@@ -73,6 +73,9 @@ pom.xml                                          Maven project object model file
 
 - **Method**: GET
 - **URL**: `/messages`
+- **Query Parameters**:
+  - `top`: Number of messages to retrieve.
+  - `sort`: Sort messages by `id`, `content`, or `createdOn`.
 - **Response**: Returns a list of all messages using `MessageResponseDTO`.
 
 **Retrieve a Message by ID**
