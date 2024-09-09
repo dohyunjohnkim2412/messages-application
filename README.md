@@ -7,6 +7,8 @@ uses an in-memory H2 database.
 
 ## Setup Instructions
 
+You can run the application using Docker or without Docker. It is recommended to use Docker.
+
 ### 1. With Docker
 
 Build the Docker image:
@@ -23,7 +25,7 @@ Run the Docker container:
 
 ### 2. Without Docker
 
-We will use the Maven Wrapper to build and run the application. If you have Maven installed, you can use the local Maven
+Use the Maven Wrapper to build and run the application. If you have Maven installed locally, you can use it
 by replacing `./mvnw` with `mvn`.
 
 #### Prerequisites
@@ -31,7 +33,6 @@ by replacing `./mvnw` with `mvn`.
 - Java 22
 
 Build the application:
-
    ```sh
    UNIX
     ./mvnw clean install
@@ -80,9 +81,28 @@ mvnw.cmd                                         Maven wrapper for Windows syste
 pom.xml                                          Maven project object model file.
 ```
 
-## API Endpoints
+## API Documentation
 
-**Retrieve All Messages**
+### Data Transfer Objects
+**MessageRequestDTO**
+
+```json
+{
+  "content": "Your message here."
+}
+```
+
+**MessageResponseDTO**
+
+```json
+{
+  "id": 1,
+  "content": "A message.",
+  "createdOn": "2022-01-01"
+}
+```
+
+### Retrieve All Messages
 
 - **Method**: GET
 - **URL**: `/messages`
@@ -91,32 +111,32 @@ pom.xml                                          Maven project object model file
     - `sort`: Sort messages by `id`, `content`, or `createdOn`.
 - **Response**: Returns a list of all messages using `MessageResponseDTO`.
 
-**Retrieve a Message by ID**
+### Retrieve a Message by ID
 
 - **Method**: GET
 - **URL**: `/messages/{id}`
-- **Response**: Returns a specific message identified by its ID using `MessageResponseDTO`.
+- **Response**: Returns a message identified by its ID using `MessageResponseDTO`.
 
-**Create a New Message**
+### Create a New Message
 
 - **Method**: POST
 - **URL**: `/messages`
 - **Request Body**: Accepts `MessageRequestDTO`.
 - **Response**: Returns the created message using `MessageResponseDTO`.
 
-**Update a Message**
+### Update a Message
 
 - **Method**: PUT
 - **URL**: `/messages/{id}`
 - **Request Body**: Accepts `MessageRequestDTO`.
 - **Response**: Returns the updated message using `MessageResponseDTO`.
 
-**Delete a Message**
+### Delete a Message
 
 - **Method**: DELETE
 - **URL**: `/messages/{id}`
 - **Response**: Returns a status code 200 if the message is successfully deleted. No content is returned.
 
-**H2 Database Console**
+### H2 Database Console
 
 - **URL**: `/h2-console`
