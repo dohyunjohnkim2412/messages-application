@@ -35,6 +35,7 @@ by replacing `./mvnw` with `mvn`.
 Build the application:
    ```sh
    UNIX
+    chmod +x mvnw
     ./mvnw clean install
    
    Windows
